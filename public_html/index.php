@@ -1,8 +1,13 @@
+<?php 
+require_once("../resources/config.php");
+require_once(TEMPLATES_PATH."/header.php");
+?>
+
 <html>	
 <head>
 	<script>
 	
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 		jAlert('This is a custom alert box', 'Alert Dialog');
 			$('#products').click(function(){
 				var clickBtnValue = $(this).val();
@@ -13,7 +18,7 @@
 					alert("action performed successfully");
 				});
 			});
-		});
+		});*/
 
 		/*function showSomething(){
 			if (window.XMLHttpRequest) {
@@ -50,7 +55,13 @@
 	</script>
 </head>
 <body>
-	<p>Página principal</p>
-	<button id="products" type="button" onClick="showSomething()">Click me!</button>
+	<div id="container">
+		<div id="content" background-color=red>
+			<p>Página principal</p>
+			<button id="products" type="button" onClick="showSomething()">Click me!</button>
+		</div>
+		<?php require_once(TEMPLATES_PATH . "/rightPanel.php"); ?>
+	</div>
+	<?php require_once(TEMPLATES_PATH . "/footer.php"); ?>
 </body>
 </html>
