@@ -1,5 +1,7 @@
 {
+	"name" : "ctedesco/le-moins-cher",
 	"require": {
-		"monolog/monolog": "1.0.*"
+		"monolog/monolog": "1.0.*",
+		"components/jquery": "2.1.*"
 	}
 }
