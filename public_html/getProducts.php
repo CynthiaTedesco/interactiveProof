@@ -1,8 +1,28 @@
 <?php 
 
-include "connection.php";
+$q = intval($_GET);
 
-if (isset($_POST['action'])) {
+$con = mysqli_connect('localhost','root', '', 'le-moins-cher');
+if (!$con) {
+    die('Could not connect: ' . mysqli_error($con));
+}
+
+mysqli_select_db($con,"le-moins-cher");
+$sql="SELECT * FROM producto";
+$result = mysqli_query($con,$sql);
+
+while($row = mysqli_fetch_array($result)) {
+    echo "- " . $row['nombre'];
+    echo "</br>";
+}
+
+mysqli_close($con);
+
+?>
+
+<!--include "connection.php";
+
+/*if (isset($_POST['action'])) {
     switch ($_POST['action']) {
         case 'insert':
             insert();
@@ -34,5 +54,6 @@ function getProducts(){
     }
 	
 	disconnect($conn);
-}	
-?>
+} 
+?>/*
+!-->

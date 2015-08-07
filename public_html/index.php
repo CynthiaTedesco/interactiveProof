@@ -5,14 +5,9 @@ require_once(TEMPLATES_PATH."/header.php");
 
 <html>	
 <head>
-	<script src="../vendor/components/jquery/jquery.min.js"/>
-	</script>
+	<script src="../vendor/components/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
-		
-		$(document).ready(function(){
-			alert("uy uy uy");
-		});
-		
+			
 		function showSomething(){
 			alert("uy uy uy");
 		};
@@ -22,7 +17,23 @@ require_once(TEMPLATES_PATH."/header.php");
 		   document.write("<H1>Hola a todos</H1>") 
 		}
 		
-	</script>
+		function showProducts() {
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET","getProducts.php?",true);
+			xmlhttp.send();
+		}
+</script>
 </head>
 <body>
 	<div id="container">
@@ -30,7 +41,9 @@ require_once(TEMPLATES_PATH."/header.php");
 		
 			<!-- javascript desde evento -->
 			<p>Página principal</p>
-			<button id="products" type="button" onClick="escribirBienvenida()">Click me!</button>
+			<button id="products" type="button" onClick="showProducts()">Click me!</button>
+			<br>
+			<div id="txtHint"><b>Product info will be listed here...</b></div>
 			<br /><br /><br />
 			
 			<!-- jquery in line -->
