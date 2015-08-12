@@ -1,30 +1,20 @@
+<!DOCTYPE html>
+
 <?php 
 require_once("../resources/config.php");
-require_once(TEMPLATES_PATH."/header.php");
-//require_once("../resources/connection.php");
-
-try {	
-		$conn = mysqli_connect('localhost','root', '', 'le-moins-cher');
-		if (!$conn) {
-			die('Could not connect: ' . mysqli_error($conn));
-		}
-
-		mysqli_select_db($conn,"le-moins-cher");
-	}
-	catch(PDOException $e){
-		echo "Connection failed: " . $e->getMessage();
-	}
-	
-$sql="SELECT * FROM producto";
-mysqli_set_charset($conn, 'utf8');
-$result = mysqli_query($conn,$sql);
-var_dump($result);
-
 ?>
 
 <html>	
-<head>
+<head lang="en">
+	<meta charset="utf-8"> 
+	<!-- Bootstrap 3 is designed to be responsive to mobile devices. Mobile-first styles are part of the core framework. 
+	The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device).
+	The initial-scale=1 part sets the initial zoom level when the page is first loaded by the browser.!-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 	<script src="../vendor/components/jquery/jquery.min.js"></script>
+	<script src="../vendor/components/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../vendor/components/bootstrap/css/bootstrap.min.css">
 	<script src="js/getters.js"></script>
 	<script type="text/javascript">
 			
@@ -47,21 +37,17 @@ var_dump($result);
 </script>
 </head>
 <body>
-	<div id="container">
+	<div class="container">
+		<?php require_once(TEMPLATES_PATH."/header.php"); ?>
 		<div id="content" background-color=red>
 		
 			<p>Productos</p>
 			<select name="selectProducts" id="selectProducts"></select>
 			<br /><br /><br />
-			
-			<!-- jquery in line -->
-			<div id="capa1" style="padding: 10px; background-color: #ff8800">Haz clic en un botón</div>
-			<br />
-			<input type="button" value="Botón A" onclick="$('#capa1').html('Has hecho clic en el botón <b>A</b>')">
-			<input type="button" value="Botón B" onclick="$('#capa1').html('Recibido un clic en el botón <b>B</b>')">
+
 		</div>
 		<?php require_once(TEMPLATES_PATH . "/rightPanel.php"); ?>
+		<?php require_once(TEMPLATES_PATH . "/footer.php"); ?>
 	</div>
-	<?php require_once(TEMPLATES_PATH . "/footer.php"); ?>
 </body>
 </html>
