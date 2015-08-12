@@ -25,31 +25,25 @@ var_dump($result);
 <html>	
 <head>
 	<script src="../vendor/components/jquery/jquery.min.js"></script>
+	<script src="js/getters.js"></script>
 	<script type="text/javascript">
 			
-		function showProducts() {
-			console.log("buscando productos");
-			if (window.XMLHttpRequest) {
-				// code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp = new XMLHttpRequest();
-			} else {
-				// code for IE6, IE5
-				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					try {
-						console.log(JSON.parse(xmlhttp.responseText));
-					} catch (e) {
-						console.log(e);
-					}
-					
-				}
-				
-			}
-			xmlhttp.open("GET","getProducts.php",true);
-			xmlhttp.send();
-		}
+		$(document).ready(function(){
+			getProducts(function callback(response){
+				chargeSelectProducts(response);
+			}); 
+		});
+		
+		function chargeSelectProducts(products){
+			var ps = JSON.parse(products)[0]; //es un gran elemento, pedimos el primero 	
+			
+			$.each(ps, function (index, value) {
+				$('#selectProducts').append($('<option/>', { 
+					value: index,
+					text : value 
+				}));
+			});
+		};
 </script>
 </head>
 <body>
@@ -57,14 +51,7 @@ var_dump($result);
 		<div id="content" background-color=red>
 		
 			<p>Productos</p>
-			<button id="products" type="button" onClick="showProducts()">Cargar productos!</button>
-			<br>
-			<select name="selectProducts"> <?
-				while($row = mysqli_fetch_array($result)) {
-					echo "<option value=\"" . $row['pro_id'] . "\">" . $row['nombre'] . "</option>";
-			?>
-			</select>
-			<div id="txtHint"><b>Product info will be listed here...</b></div>
+			<select name="selectProducts" id="selectProducts"></select>
 			<br /><br /><br />
 			
 			<!-- jquery in line -->

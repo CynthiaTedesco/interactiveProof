@@ -15,10 +15,11 @@ $result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
     $x[$row['pro_id']]=$row['nombre'];
-    $response[] = $x;
 }
-$out = array_values($response);
-echo json_encode($out);
+
+$response[] = $x;
+
+echo json_encode($response);
 mysqli_close($conn);
 
 /*
