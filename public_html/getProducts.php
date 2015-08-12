@@ -1,26 +1,28 @@
-<?php 
+﻿<?php 
 
 $q = intval($_GET);
 
-$con = mysqli_connect('localhost','root', '', 'le-moins-cher');
-if (!$con) {
+$conn = mysqli_connect('localhost','root', '', 'le-moins-cher');
+if (!$conn) {
     die('Could not connect: ' . mysqli_error($con));
 }
 
-mysqli_select_db($con,"le-moins-cher");
+mysqli_select_db($conn,"le-moins-cher");
 $sql="SELECT * FROM producto";
-$result = mysqli_query($con,$sql);
+
+mysqli_set_charset($conn, 'utf8');
+$result = mysqli_query($conn,$sql);
 
 while($row = mysqli_fetch_array($result)) {
-    echo "- " . $row['nombre'];
-    echo "</br>";
+    $x[$row['pro_id']]=$row['nombre'];
+    $response[] = $x;
 }
+$out = array_values($response);
+echo json_encode($out);
+mysqli_close($conn);
 
-mysqli_close($con);
-
-?>
-
-<!--include "connection.php";
+/*
+include "connection.php";
 
 /*if (isset($_POST['action'])) {
     switch ($_POST['action']) {
@@ -55,5 +57,6 @@ function getProducts(){
 	
 	disconnect($conn);
 } 
-?>/*
-!-->
+*/
+
+?>

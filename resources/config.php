@@ -11,7 +11,7 @@ $config = array(
 		"db1" => array(
 			"dbname" => "interactiveProof",
 			"username" => "root",
-			"password" => "root",
+			"password" => "",
 			"host" => "localhost"
 			)
 	),

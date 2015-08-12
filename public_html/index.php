@@ -1,6 +1,25 @@
 <?php 
 require_once("../resources/config.php");
 require_once(TEMPLATES_PATH."/header.php");
+//require_once("../resources/connection.php");
+
+try {	
+		$conn = mysqli_connect('localhost','root', '', 'le-moins-cher');
+		if (!$conn) {
+			die('Could not connect: ' . mysqli_error($conn));
+		}
+
+		mysqli_select_db($conn,"le-moins-cher");
+	}
+	catch(PDOException $e){
+		echo "Connection failed: " . $e->getMessage();
+	}
+	
+$sql="SELECT * FROM producto";
+mysqli_set_charset($conn, 'utf8');
+$result = mysqli_query($conn,$sql);
+var_dump($result);
+
 ?>
 
 <html>	
@@ -8,16 +27,8 @@ require_once(TEMPLATES_PATH."/header.php");
 	<script src="../vendor/components/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
 			
-		function showSomething(){
-			alert("uy uy uy");
-		};
-		
-		function escribirBienvenida(){ 
-			console.log("consoleando");
-		   document.write("<H1>Hola a todos</H1>") 
-		}
-		
 		function showProducts() {
+			console.log("buscando productos");
 			if (window.XMLHttpRequest) {
 				// code for IE7+, Firefox, Chrome, Opera, Safari
 				xmlhttp = new XMLHttpRequest();
@@ -27,10 +38,16 @@ require_once(TEMPLATES_PATH."/header.php");
 			}
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+					try {
+						console.log(JSON.parse(xmlhttp.responseText));
+					} catch (e) {
+						console.log(e);
+					}
+					
 				}
+				
 			}
-			xmlhttp.open("GET","getProducts.php?",true);
+			xmlhttp.open("GET","getProducts.php",true);
 			xmlhttp.send();
 		}
 </script>
@@ -39,10 +56,14 @@ require_once(TEMPLATES_PATH."/header.php");
 	<div id="container">
 		<div id="content" background-color=red>
 		
-			<!-- javascript desde evento -->
-			<p>Página principal</p>
-			<button id="products" type="button" onClick="showProducts()">Click me!</button>
+			<p>Productos</p>
+			<button id="products" type="button" onClick="showProducts()">Cargar productos!</button>
 			<br>
+			<select name="selectProducts"> <?
+				while($row = mysqli_fetch_array($result)) {
+					echo "<option value=\"" . $row['pro_id'] . "\">" . $row['nombre'] . "</option>";
+			?>
+			</select>
 			<div id="txtHint"><b>Product info will be listed here...</b></div>
 			<br /><br /><br />
 			
