@@ -3,6 +3,7 @@
 
 <?php 
 require_once("../resources/config.php");
+
 ?>
 
 <head>
@@ -13,11 +14,12 @@ require_once("../resources/config.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../vendor/components/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css">
-	<script src="../vendor/components/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../vendor/components/jquery/jquery.min.js"></script>
+	<script src="../vendor/components/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../vendor/components/jqueryui/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="css/customStyles.css">
 	<script src="js/getters.js"></script>
+	<script src="js/setters.js"></script>
 	<script src="js/utils.js"></script>
 	<script type="text/javascript">
 			
@@ -55,7 +57,7 @@ require_once("../resources/config.php");
 	});
 	
 	$(function(){
-		$("#spanNewProduct").hide();
+		$("#includedProduct").hide();
 	});
 	
 	$(function() {
@@ -72,36 +74,37 @@ require_once("../resources/config.php");
 	<div class="ui-widget">
 		
 		<div id="includedSupermarket"></div>
-		<span>
-			<label>Producto </label>
-			<button id="addProduct" type="button" class="btn btn-info">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-			<select id="selectProductos">
-			</select>
-		</span>
-		<span id="spanNewProduct">
-			<div id="addProductDiv" >
-				<label>Nombre </label>
-				<input id="productName"></input>
-			</div>
-			<div>
-				<label>Marca </label>
-				<select id="selectMarcas">
+		<div id="includedProduct">
+			<span>
+				<label>Producto </label>
+				<button id="addProduct" type="button" class="btn btn-info">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>
+				<select id="selectProductos">
 				</select>
-			</div>	
-			<div>
-				<label>Categoría </label>
-				<select id="selectCategorias">
-				</select>
-			</div>	
-			<div>
-				<label>Palabra Clave </label>
-				<select id="selectPalabrasClave">
-				</select>
-			</div>	
-		</span>
-		
+			</span>
+			<span id="spanNewProduct">
+				<div id="addProductDiv" >
+					<label>Nombre </label>
+					<input id="productName"></input>
+				</div>
+				<div>
+					<label>Marca </label>
+					<select id="selectMarcas">
+					</select>
+				</div>	
+				<div>
+					<label>Categoría </label>
+					<select id="selectCategorias">
+					</select>
+				</div>	
+				<div>
+					<label>Palabra Clave </label>
+					<select id="selectPalabrasClave">
+					</select>
+				</div>	
+			</span>
+		</div>
 	</div>
 	<br/>
 	<?php require_once(TEMPLATES_PATH . "/rightPanel.php"); ?>
