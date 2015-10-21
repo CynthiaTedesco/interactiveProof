@@ -9,9 +9,14 @@ $supermarketName = $_POST['supermarketName'];
 $conn = connectDB();
 $sql="INSERT INTO supermercado (nombre) VALUES ('". $supermarketName ."');";
 
-$result = mysqli_query($conn,$sql);
+mysqli_query($conn,$sql);
 
-echo mysqli_connect_errno();
+//echo mysqli_connect_errno();
+if (mysqli_connect_errno()== 0){
+	echo mysqli_insert_id($conn);
+} else {
+	echo mysqli_connect_errno();
+};
 
 mysqli_close($conn);
 

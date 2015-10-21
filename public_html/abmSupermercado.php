@@ -50,13 +50,23 @@
 		$(function(){
 			$("#saveSupermarket").click(function(){
 				setSupermarket(function callback(response){
-					alert(response);
 					if (response){
-						alert("Se ha guardado con éxito el Supermercado");
+						console.log("Se ha guardado con éxito el supermercado. ID: " + response);
 					} else {
-						alert("Ha ocurrido un error durante la creación de Supermercado");
+						console.log("Ha ocurrido un error durante la creación de Supermercado");
 					}
 				}, $("#supermarketName").val());
+				
+				setAddress(function callback(response){
+						
+						if (response){
+							console.log("Se ha guardado con éxito la dirección: ID: " + response);
+						} else {
+							console.log("Ha ocurrido un error durante la creación de la dirección");
+						};
+					}, 
+					$("#supermarketBranchStreet").val(), $("#supermarketBranchNumber").val(), $("#supermarketBranchPostalCode").val(), $("#supermarketBranchCity").val()
+				);
 			});
 		});
 	</script>
